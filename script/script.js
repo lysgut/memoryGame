@@ -1,6 +1,7 @@
 let botones = document.querySelectorAll(".card");
 let mezclarBotton = document.getElementById("mezclar");
-let combination = ['n','n']
+let sameChecking = ['n', 'n']
+let combination= ['n', 'n']
 let imagenes = [
     {
         url : "0",
@@ -102,12 +103,12 @@ function checkCombination(){
     }
     else{
         if(combination[0] == combination[1]){
-            alert("bien ahi")
+            alert("Nah, sos el mascapito... River goty")
             combination = ["n", "n"]
             return true
         }
         else {
-            alert("mal ahi")
+            alert("Mejor suerte a la proxima papi")
             combination = ["n", "n"]
             return false
         }
@@ -115,13 +116,34 @@ function checkCombination(){
 }
 function asignar(x){
     if(combination[0] == "n"){
-        combination[1] = x
+        combination[0] = x
     }
     else{
-        combination[0] = x
+        combination[1] = x
     }
 }
 
+function asignarCheck(x){
+    if(sameChecking[0] == "n"){
+        sameChecking[0] = x
+    }
+    else{
+        sameChecking[1] = x
+    }
+}
+
+function sameCheck(){
+    if((sameChecking[0] && sameChecking[1]) != 'n' ) {
+        if(sameChecking[0] === sameChecking[1]) {
+            sameChecking = ["n", "n"]
+            return false
+        }
+        else{
+            sameChecking = ["n", "n"]
+            return true
+        }
+        }
+    }
 
 function mix(arreglo) {
     arreglo.sort(function() {
@@ -131,16 +153,23 @@ function mix(arreglo) {
 
 botones.forEach(function(boton) {
     boton.addEventListener("click", function() {
-    asignar(boton.value)
-    console.log(combination)
-    if(checkCombination()){
+        asignar(boton.value)
+        asignarCheck(boton.id)
+        console.log(sameChecking)
+        console.log(combination)
         let valuePid = boton.value
-        let boton1 = getElementById(valuePid + "a")
-        let boton2 = getElementById(valuePid + "b")
-        boton1.style.display = "none"
-        boton2.style.display = "none"
-    }
+        let boton1 = document.getElementById(valuePid + "a")
+        let boton2 = document.getElementById(valuePid + "b")
+        if(sameCheck()){
+            if(checkCombination()){
+                boton1.style.opacity = "0"
+                boton2.style.opacity = "0"
+                boton1.disabled = true
+                boton2.disabled = true
+            }
+        }
 
+        
     });
 });
 
