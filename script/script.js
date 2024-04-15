@@ -1,6 +1,6 @@
 let botones = document.querySelectorAll(".card");
 let mezclarBotton = document.getElementById("mezclar");
-let sameChecking = ['n', 'n']
+let sameChecking  = ['n', 'n']
 let combination= ['n', 'n']
 let imagenes = [
     {
@@ -85,11 +85,14 @@ let imagenes = [
     },
 ]
 
+function mix(arreglo) {
+    arreglo.sort(function() {
+        return Math.random() - 0.5;
+    });
+}
 
 mezclarBotton.addEventListener("click", () => {
     mix(imagenes)
-    console.log(imagenes)
-
     botones.forEach(function(boton, i) {
         let asig = imagenes[i];
         boton.textContent = asig.url;
@@ -98,78 +101,59 @@ mezclarBotton.addEventListener("click", () => {
     });
 });
 
-function checkCombination(){
-    if(combination[0] == "n" || combination[1] == "n" ){
+function asignarCheck(id, value){
+    if(sameChecking [0] == "n"){
+        sameChecking [0] = id
     }
     else{
-        if(combination[0] == combination[1]){
-            alert("Nah, sos el mascapito... River goty")
-            combination = ["n", "n"]
-            return true
-        }
-        else {
-            alert("Mejor suerte a la proxima papi")
-            combination = ["n", "n"]
-            return false
-        }
+        sameChecking [1] = id
     }
-}
-function asignar(x){
+
     if(combination[0] == "n"){
-        combination[0] = x
+        combination[0] = value
     }
     else{
-        combination[1] = x
+        combination[1] = value
     }
 }
 
-function asignarCheck(x){
-    if(sameChecking[0] == "n"){
-        sameChecking[0] = x
+function checkcombination(){
+    if(combination[0] == combination[1]){
+        combination = ["n", "n"]
+        sameChecking  = ["n", "n"]
+        return true
     }
-    else{
-        sameChecking[1] = x
+    else {
+        combination = ["n", "n"]
+        sameChecking  = ["n", "n"]
+        return false
     }
 }
 
 function sameCheck(){
-    if((sameChecking[0] && sameChecking[1]) != 'n' ) {
-        if(sameChecking[0] === sameChecking[1]) {
-            sameChecking = ["n", "n"]
+    if((sameChecking [0] && sameChecking [1]) != 'n' ) {
+        if(sameChecking [0] === sameChecking [1]) {
             return false
         }
         else{
-            sameChecking = ["n", "n"]
             return true
         }
-        }
     }
-
-function mix(arreglo) {
-    arreglo.sort(function() {
-        return Math.random() - 0.5;
-    });
 }
 
 botones.forEach(function(boton) {
     boton.addEventListener("click", function() {
-        asignar(boton.value)
-        asignarCheck(boton.id)
-        console.log(sameChecking)
-        console.log(combination)
+        asignarCheck(boton.id, boton.value)
         let valuePid = boton.value
         let boton1 = document.getElementById(valuePid + "a")
         let boton2 = document.getElementById(valuePid + "b")
         if(sameCheck()){
-            if(checkCombination()){
+            if(checkcombination()){
                 boton1.style.opacity = "0"
                 boton2.style.opacity = "0"
                 boton1.disabled = true
                 boton2.disabled = true
             }
         }
-
-        
     });
 });
-
