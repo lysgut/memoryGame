@@ -1,0 +1,55 @@
+body {
+  background-color: #a4f9c8;
+}
+
+.container {  
+  
+    
+    
+    
+    
+  margin-left: 13%;
+  margin-top: 5%;
+  display: grid;
+  border: solid;
+  margin: 4rem auto;
+  margin-bottom: 0px;
+  box-shadow: 0 0 20px 5px rgba(108, 255, 169, 0.5);
+  grid-template-columns: repeat(6, 1fr);
+grid-template-rows: repeat(5, 1fr);
+  grid-column-gap: 45px;
+  grid-row-gap: 11px;
+  gap:0% 0%;
+  grid-auto-flow: row;
+  grid-template-areas:
+    ". . . ."
+    ". . . ."
+    ". . . ."
+    ". . . .";
+}
+  
+.card{
+  background-color: rgb(0, 204, 255);
+  max-width: 20%;
+  max-height: 20%;
+  padding: 14.8%;
+  margin-top: 5%;
+  justify-content: center;
+  justify-items: center;
+  align-items: center;
+  align-content: center;
+  transition: opacity 0.5s ease; 
+  animation: flipOutY 2s ease;
+}
+
+.footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background-color: #001D4A;
+  color: aliceblue;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
